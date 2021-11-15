@@ -8,7 +8,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <nav class="p-6 bg-white flex justify-between">
+    <nav class="p-6 bg-white flex justify-between mb-6">
         <ul class="flex items-center">
             <li>
                 <a href="" class="p-3">Home</a>

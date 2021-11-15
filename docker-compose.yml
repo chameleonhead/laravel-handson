@@ -18,7 +18,7 @@ services:
       - ./docker/mysql/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: database
+      MYSQL_DATABASE: laravel
     ports:
       - 3306:3306
   phpmyadmin:

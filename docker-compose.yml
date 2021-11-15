@@ -5,7 +5,7 @@ services:
     build: 
       context: ./docker/web
     volumes:
-      - ./src:/app
+      - .:/app
       - ./docker/web/sites-enabled:/etc/apache2/sites-enabled
     ports:
       - 8080:80

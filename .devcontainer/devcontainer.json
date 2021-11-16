@@ -27,7 +27,8 @@
 		"felixfbecker.php-pack",
 		"bmewburn.vscode-intelephense-client",
 		"onecentlin.laravel-blade",
-		"shufo.vscode-blade-formatter"
+		"shufo.vscode-blade-formatter",
+		"MehediDracula.php-namespace-resolver"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

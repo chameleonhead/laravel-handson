@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex justify-center">
         <div class="w-8/12 bg-white p-6 rounded-lg">
-            <form action="{{ route('posts') }}" method="post">
+            <form action="{{ route('posts') }}" method="post" class="mb-4">
                 @csrf
                 <div class="mb-4">
                     <label for="body" class="sr-only">Body</label>
@@ -29,6 +29,22 @@
                         <a href="" class="font-bold">{{ $post->user->name }}</a>
                         <span class="text-gray-600 text-sm">{{ $post->created_at->diffForHumans() }}</span>
                         <p class="mb-2">{{ $post->body }}</p>
+
+                        <div class="flex items-center">
+                            @if(!$post->likedBy(auth()->user()))
+                                <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1">
+                                    @csrf
+                                    <button type="submit" class=text-blue-500>Like</button>
+                                </form>
+                            @else
+                                <form action="" method="post" class="mr-1">
+                                    @csrf
+                                    <button type="submit" class=text-blue-500>Unlike</button>
+                                </form>
+                            @endif
+
+                            <span>{{ $post->likes->count() }} {{ Str::plural('like', $post->likes->count()) }}</span>
+                        </div>
                     </div>
                 @endforeach
             @else

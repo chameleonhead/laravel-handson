@@ -31,3 +31,6 @@ RUN apt update && apt install -y libzip-dev
 RUN docker-php-ext-install zip
 
 RUN composer global require laravel/installer
+
+# sendmail を使用できるように変更
+RUN apt install -y sendmail

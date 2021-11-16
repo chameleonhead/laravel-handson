@@ -26,7 +26,8 @@
             @if ($posts->count())
                 @foreach ($posts as $post)
                     <div class="mb-4">
-                        <a href="" class="font-bold">{{ $post->user->name }}</a>
+                        <a href="{{ route('users.posts', $post->user) }}"
+                            class="font-bold">{{ $post->user->name }}</a>
                         <span class="text-gray-600 text-sm">{{ $post->created_at->diffForHumans() }}</span>
                         <p class="mb-2">{{ $post->body }}</p>
 
@@ -39,6 +40,7 @@
                                 </form>
                             </div>
                         @endcan
+
                         <div class="flex items-center">
                             @auth
                                 @if (!$post->likedBy(auth()->user()))
@@ -53,7 +55,6 @@
                                         <button type="submit" class=text-blue-500>Unlike</button>
                                     </form>
                                 @endif
-
                             @endauth
 
                             <span>{{ $post->likes->count() }} {{ Str::plural('like', $post->likes->count()) }}</span>

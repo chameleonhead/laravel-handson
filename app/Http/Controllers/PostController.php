@@ -26,8 +26,10 @@ class PostController extends Controller
         return back();
     }
 
-    public function destroy(Post $post)
+    public function destroy(Post $post, Request $request)
     {
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         return back();

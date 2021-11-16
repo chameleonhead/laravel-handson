@@ -28,7 +28,10 @@
                     <a href="" class="p-3">Yuto Nagano</a>
                 </li>
                 <li>
-                    <a href="" class="p-3">Logout</a>
+                    <form action="{{ route('logout') }}" method="post" class="inline">
+                        @csrf
+                        <button>Logout</button>
+                    </form>
                 </li>
             @endauth
 

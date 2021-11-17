@@ -1,21 +1,20 @@
 version: '3.0'
 
-services:
-  web: 
+services: 
+  dusk:
     build: 
       context: ./docker/web
     volumes:
       - .:/app
-      - ./docker/web/sites-enabled:/etc/apache2/sites-enabled
-    ports:
-      - 8080:80
-      - 8443:443
+    working_dir: /app
+    command: php artisan dusk
     environment:
+      - DUSK_DRIVER_URL=http://selenium:4444/
       - APP_NAME=Laravel
       - APP_ENV=local
       - APP_KEY=base64:JdOrYkK358m+ir9/8MQezti4yTUuvs35IWmU+SgjCZk=
       - APP_DEBUG=false
-      - APP_URL=http://localhost:8443
+      - APP_URL=http://web:8000
  
       - LOG_CHANNEL=stack
  
@@ -57,27 +56,19 @@ services:
 
       - MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
       - MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+  web:
+    working_dir: /app
+    command: php artisan serve --host 0.0.0.0
+    ports:
+      - 8000:8000
+    environment:
+      - APP_DEBUG=true
+      - APP_URL=http://web:8000
   db:
-    image: mysql:5.7
     restart: always
     volumes:
-      - ./docker/mysql/data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: laravel
+      - ./docker/mysql/data_test:/var/lib/mysql
+  selenium:
+    image: selenium/standalone-chrome
     ports:
-      - 3306:3306
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    ports:
-      - 8081:80
-    environment:
-      PMA_HOST: db
-      PMA_USER: root
-      PMA_PASSWORD: root
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - 1025:1025
-      - 8025:8025
+      - 4444:4444
